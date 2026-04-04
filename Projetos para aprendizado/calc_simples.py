@@ -1,4 +1,4 @@
-#Calculadora
+#Calculadora simples, pega 3 input separados
 
 while True:
     numero1 = float(input("Insira o primeiro numero: "))
@@ -17,9 +17,9 @@ while True:
             exit()
         resultado = numero1 / numero2
     elif operador == "**": #potência
-        resultado = numero1 / numero2
+        resultado = numero1 ** numero2
     elif operador == "%": #modulo: resto da divisão
-        resultado = numero1 / numero2
+        resultado = numero1 % numero2
     else:
         print("Operador inválido")
         exit()
