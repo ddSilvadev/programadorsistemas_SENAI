@@ -1,0 +1,15 @@
+Aprendendo sobre github
+foi criado a pasta "WEBSITE_IA" com o esqueleto/estrutura básica de um website
+
+tree /f
+WEBSITE_IA - 
+    │   index.html
+    │
+    ├───assets
+    │   ├───images
+    |   |   
+    │   └───javascript
+    │           olamundo.js
+    │
+    └───css
+            style.css
