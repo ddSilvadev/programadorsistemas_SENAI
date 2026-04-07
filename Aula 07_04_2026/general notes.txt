@@ -3,13 +3,12 @@ foi criado a pasta "WEBSITE_IA" com o esqueleto/estrutura básica de um website
 
 tree /f
 WEBSITE_IA - 
-    │   index.html
-    │
-    ├───assets
-    │   ├───images
-    |   |   
-    │   └───javascript
-    │           olamundo.js
-    │
-    └───css
-            style.css
+│   index.html
+│
+└───assets
+    ├───css
+    │    style.css
+    ├───images
+    |   |
+    └───javascript
+            script.js
