@@ -25,7 +25,7 @@ def calcular(entrada):
     partes = entrada.split(operador) #aqui uso split() para separar o input e como delimitador é usado o {operador}, o que retorna 2 numeros em uma lista ex: ["10", "5"]
     if len(partes) != 2:
         return "Formato inválido"
-    #aqui verifico se o input é um numero, caso não for retorna erro
+    #verifica se o input é um numero, caso não for retorna erro
     try:
         numero1 = float(partes[0].strip()) #apenas o float já é o suficiente mas para tirar spaços, letras, etc. mas usar .strip() é boa prática 
         numero2 = float(partes[1].strip())
