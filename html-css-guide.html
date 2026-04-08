@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo: HTML5 e CSS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 20px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: #e9ecef;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .lesson h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .lesson h3 {
+            color: #495057;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .lesson p {
+            line-height: 1.8;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .code-example {
+            background: #282c34;
+            color: #abb2bf;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-example pre {
+            margin: 0;
+        }
+
+        .live-demo {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .live-demo-label {
+            background: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .interactive-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .interactive-box:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .flex-demo {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .flex-item {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .tip {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .tip strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .button-demo {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .button-demo:hover {
+            background: #764ba2;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-demo {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .form-demo input,
+        .form-demo textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-demo input:focus,
+        .form-demo textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .tag-example {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px;
+            font-family: 'Courier New', monospace;
+            color: #495057;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 8px 0;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Guia Interativo: HTML5 e CSS</h1>
+            <p>Aprenda do zero com exemplos práticos e interativos!</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showSection('intro')">Introdução</button>
+            <button class="tab" onclick="showSection('html-basico')">HTML Básico</button>
+            <button class="tab" onclick="showSection('html-avancado')">HTML Avançado</button>
+            <button class="tab" onclick="showSection('css-basico')">CSS Básico</button>
+            <button class="tab" onclick="showSection('css-layout')">CSS Layout</button>
+            <button class="tab" onclick="showSection('pratica')">Prática</button>
+        </div>
+
+        <div class="content">
+            <!-- Seção: Introdução -->
+            <div id="intro" class="section active">
+                <div class="lesson">
+                    <h2>🎯 O que são HTML5 e CSS?</h2>
+                    
+                    <h3>HTML5 (HyperText Markup Language)</h3>
+                    <p>HTML é a <strong>estrutura</strong> de uma página web. Pense nele como o esqueleto de uma casa - ele define onde fica cada coisa: títulos, parágrafos, imagens, links, etc.</p>
+                    
+                    <h3>CSS (Cascading Style Sheets)</h3>
+                    <p>CSS é o <strong>estilo visual</strong> da página. É como a pintura e decoração da casa - cores, tamanhos, posicionamento, animações, etc.</p>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">✨ Exemplo Visual</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div style="border: 3px solid #667eea; padding: 20px; border-radius: 10px;">
+                                <h4 style="color: #667eea;">Sem CSS (só HTML)</h4>
+                                <h1>Título</h1>
+                                <p>Texto simples</p>
+                                <button>Botão</button>
+                            </div>
+                            <div style="border: 3px solid #764ba2; padding: 20px; border-radius: 10px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <h4 style="color: white;">Com CSS</h4>
+                                <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Título</h1>
+                                <p style="color: white;">Texto estilizado</p>
+                                <button style="background: white; color: #667eea; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer;">Botão</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Dica:</strong>
+                        HTML e CSS trabalham juntos! HTML cria a estrutura e CSS deixa tudo bonito e organizado.
+                    </div>
+                </div>
+
+                <div class="lesson">
+                    <h2>🛠️ Estrutura Básica de um Documento HTML</h2>
+                    
+                    <div class="code-example">
+<pre>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Minha Primeira Página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Olá, Mundo!&lt;/h1&gt;
+    &lt;p&gt;Esta é minha primeira página web.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+                    </div>
+
+                    <p><strong>Explicação de cada parte:</strong></p>
+                    <ul>
+                        <li><code>&lt;!DOCTYPE html&gt;</code> - Diz ao navegador que é um documento HTML5</li>
+                        <li><code>&lt;html&gt;</code> - Tag principal que envolve tudo</li>
+                        <li><code>&lt;head&gt;</code> - Informações sobre a página (não aparece na tela)</li>
+                        <li><code>&lt;body&gt;</code> - Conteúdo visível da página</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Seção: HTML Básico -->
+            <div id="html-basico" class="section">
+                <div class="lesson">
+                    <h2>📝 Tags HTML Essenciais</h2>
+                    
+                    <h3>Títulos e Parágrafos</h3>
+                    <div class="code-example">
+<pre>&lt;h1&gt;Título Principal&lt;/h1&gt;
+&lt;h2&gt;Subtítulo&lt;/h2&gt;
+&lt;h3&gt;Título Menor&lt;/h3&gt;
+&lt;p&gt;Este é um parágrafo de texto.&lt;/p&gt;</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Como fica:</div>
+                        <h1>Título Principal</h1>
+                        <h2>Subtítulo</h2>
+                        <h3>Título Menor</h3>
+                        <p>Este é um parágrafo de texto.</p>
+                    </div>
+
+                    <h3>Links e Imagens</h3>
+                    <div class="code-example">
+<pre>&lt;a href="https://google.com"&gt;Clique aqui&lt;/a&gt;
+&lt;img src="imagem.jpg" alt="Descrição da imagem"&gt;</pre>
+                    </div>
+
+                    <h3>Listas</h3>
+                    <div class="code-example">
+<pre>&lt;!-- Lista não ordenada --&gt;
+&lt;ul&gt;
+    &lt;li&gt;Item 1&lt;/li&gt;
+    &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- Lista ordenada --&gt;
+&lt;ol&gt;
+    &lt;li&gt;Primeiro&lt;/li&gt;
+    &lt;li&gt;Segundo&lt;/li&gt;
+&lt;/ol&gt;</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Como fica:</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <strong>Lista não ordenada:</strong>
+                                <ul>
+                                    <li>Maçã</li>
+                                    <li>Banana</li>
+                                    <li>Laranja</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Lista ordenada:</strong>
+                                <ol>
+                                    <li>Acordar</li>
+                                    <li>Escovar os dentes</li>
+                                    <li>Tomar café</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Formatação de Texto</h3>
+                    <div class="code-example">
+<pre>&lt;strong&gt;Texto em negrito&lt;/strong&gt;
+&lt;em&gt;Texto em itálico&lt;/em&gt;
+&lt;u&gt;Texto sublinhado&lt;/u&gt;
+&lt;mark&gt;Texto destacado&lt;/mark&gt;</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Como fica:</div>
+                        <p><strong>Texto em negrito</strong></p>
+                        <p><em>Texto em itálico</em></p>
+                        <p><u>Texto sublinhado</u></p>
+                        <p><mark>Texto destacado</mark></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: HTML Avançado -->
+            <div id="html-avancado" class="section">
+                <div class="lesson">
+                    <h2>🏗️ Elementos de Estrutura (HTML5 Semântico)</h2>
+                    
+                    <p>HTML5 trouxe tags que dão <strong>significado</strong> às diferentes partes da página:</p>
+
+                    <div class="code-example">
+<pre>&lt;header&gt;Cabeçalho do site&lt;/header&gt;
+&lt;nav&gt;Menu de navegação&lt;/nav&gt;
+&lt;main&gt;Conteúdo principal&lt;/main&gt;
+&lt;article&gt;Um artigo ou post&lt;/article&gt;
+&lt;section&gt;Uma seção da página&lt;/section&gt;
+&lt;aside&gt;Conteúdo lateral&lt;/aside&gt;
+&lt;footer&gt;Rodapé do site&lt;/footer&gt;</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">📐 Estrutura Visual de uma Página:</div>
+                        <div style="border: 2px solid #667eea; border-radius: 10px; overflow: hidden;">
+                            <div style="background: #667eea; color: white; padding: 20px; text-align: center;">
+                                <strong>&lt;header&gt;</strong> Cabeçalho
+                            </div>
+                            <div style="background: #764ba2; color: white; padding: 15px; text-align: center;">
+                                <strong>&lt;nav&gt;</strong> Navegação
+                            </div>
+                            <div style="display: grid; grid-template-columns: 3fr 1fr; gap: 2px;">
+                                <div style="background: #f093fb; color: white; padding: 40px; text-align: center;">
+                                    <strong>&lt;main&gt;</strong> Conteúdo Principal
+                                </div>
+                                <div style="background: #4facfe; color: white; padding: 40px; text-align: center;">
+                                    <strong>&lt;aside&gt;</strong> Lateral
+                                </div>
+                            </div>
+                            <div style="background: #667eea; color: white; padding: 20px; text-align: center;">
+                                <strong>&lt;footer&gt;</strong> Rodapé
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Formulários</h3>
+                    <div class="code-example">
+<pre>&lt;form&gt;
+    &lt;label&gt;Nome:&lt;/label&gt;
+    &lt;input type="text" placeholder="Digite seu nome"&gt;
+    
+    &lt;label&gt;Email:&lt;/label&gt;
+    &lt;input type="email" placeholder="seu@email.com"&gt;
+    
+    &lt;textarea placeholder="Sua mensagem"&gt;&lt;/textarea&gt;
+    
+    &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Formulário Interativo:</div>
+                        <div class="form-demo">
+                            <label>Nome:</label>
+                            <input type="text" placeholder="Digite seu nome">
+                            
+                            <label>Email:</label>
+                            <input type="email" placeholder="seu@email.com">
+                            
+                            <label>Mensagem:</label>
+                            <textarea placeholder="Sua mensagem" rows="3"></textarea>
+                            
+                            <button class="button-demo">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: CSS Básico -->
+            <div id="css-basico" class="section">
+                <div class="lesson">
+                    <h2>🎨 Como Adicionar CSS</h2>
+                    
+                    <h3>1. CSS Inline (dentro da tag)</h3>
+                    <div class="code-example">
+<pre>&lt;p style="color: blue; font-size: 20px;"&gt;Texto azul&lt;/p&gt;</pre>
+                    </div>
+
+                    <h3>2. CSS Interno (na tag &lt;style&gt;)</h3>
+                    <div class="code-example">
+<pre>&lt;style&gt;
+    p {
+        color: blue;
+        font-size: 20px;
+    }
+&lt;/style&gt;</pre>
+                    </div>
+
+                    <h3>3. CSS Externo (arquivo separado) - RECOMENDADO</h3>
+                    <div class="code-example">
+<pre>&lt;link rel="stylesheet" href="estilo.css"&gt;</pre>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Melhor Prática:</strong>
+                        Use CSS externo! Deixa o código organizado e você pode reutilizar o mesmo estilo em várias páginas.
+                    </div>
+                </div>
+
+                <div class="lesson">
+                    <h2>🎯 Seletores CSS</h2>
+                    
+                    <h3>Seletor de Tag</h3>
+                    <div class="code-example">
+<pre>p {
+    color: red;
+}</pre>
+                    </div>
+                    <p>Seleciona TODAS as tags &lt;p&gt;</p>
+
+                    <h3>Seletor de Classe (.)</h3>
+                    <div class="code-example">
+<pre>.minha-classe {
+    color: blue;
+}</pre>
+                    </div>
+                    <p>Usa: <code>&lt;p class="minha-classe"&gt;</code></p>
+
+                    <h3>Seletor de ID (#)</h3>
+                    <div class="code-example">
+<pre>#meu-id {
+    color: green;
+}</pre>
+                    </div>
+                    <p>Usa: <code>&lt;p id="meu-id"&gt;</code></p>
+
+                    <div class="tip">
+                        <strong>💡 Importante:</strong>
+                        <ul>
+                            <li>Classes podem ser usadas várias vezes</li>
+                            <li>IDs devem ser únicos na página</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lesson">
+                    <h2>✨ Propriedades CSS Mais Usadas</h2>
+                    
+                    <h3>Cores e Fundos</h3>
+                    <div class="code-example">
+<pre>color: blue;              /* Cor do texto */
+background-color: yellow; /* Cor de fundo */
+background: linear-gradient(to right, red, blue); /* Gradiente */</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Exemplos:</div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                            <div style="background-color: #667eea; color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                                Cor Sólida
+                            </div>
+                            <div style="background: linear-gradient(to right, #667eea, #764ba2); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                                Gradiente
+                            </div>
+                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center;">
+                                Gradiente Diagonal
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Tamanhos e Espaçamentos</h3>
+                    <div class="code-example">
+<pre>width: 200px;        /* Largura */
+height: 100px;       /* Altura */
+padding: 20px;       /* Espaço interno */
+margin: 10px;        /* Espaço externo */
+border: 2px solid black; /* Borda */</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">📦 Box Model (Modelo de Caixa):</div>
+                        <div style="background: #e9ecef; padding: 30px; text-align: center;">
+                            <div style="background: #ffc107; padding: 5px; display: inline-block;">
+                                <strong>MARGIN</strong> (margem externa)
+                                <div style="background: #4facfe; padding: 5px; margin: 10px;">
+                                    <strong>BORDER</strong> (borda)
+                                    <div style="background: #f093fb; padding: 5px; border: 3px solid white;">
+                                        <strong>PADDING</strong> (espaço interno)
+                                        <div style="background: white; padding: 20px; color: #667eea; font-weight: bold;">
+                                            CONTEÚDO
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Texto</h3>
+                    <div class="code-example">
+<pre>font-size: 18px;          /* Tamanho */
+font-weight: bold;        /* Negrito */
+text-align: center;       /* Alinhamento */
+font-family: Arial;       /* Fonte */
+text-decoration: underline; /* Sublinhado */</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: CSS Layout -->
+            <div id="css-layout" class="section">
+                <div class="lesson">
+                    <h2>📐 Flexbox - Layout Flexível</h2>
+                    
+                    <p>Flexbox facilita MUITO o alinhamento de elementos!</p>
+
+                    <div class="code-example">
+<pre>.container {
+    display: flex;
+    justify-content: center;    /* Alinha horizontalmente */
+    align-items: center;        /* Alinha verticalmente */
+    gap: 20px;                  /* Espaço entre itens */
+}</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Flexbox em Ação:</div>
+                        <div class="flex-demo">
+                            <div class="flex-item">Item 1</div>
+                            <div class="flex-item">Item 2</div>
+                            <div class="flex-item">Item 3</div>
+                            <div class="flex-item">Item 4</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Flexbox é perfeito para:</strong>
+                        <ul>
+                            <li>Menus de navegação</li>
+                            <li>Centralizar elementos</li>
+                            <li>Layouts responsivos</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lesson">
+                    <h2>🎯 Grid - Layout em Grade</h2>
+                    
+                    <p>Grid CSS é ideal para layouts mais complexos!</p>
+
+                    <div class="code-example">
+<pre>.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* 3 colunas iguais */
+    gap: 20px;                            /* Espaço entre */
+}</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Grid em Ação:</div>
+                        <div class="grid-demo">
+                            <div class="grid-item">1</div>
+                            <div class="grid-item">2</div>
+                            <div class="grid-item">3</div>
+                            <div class="grid-item">4</div>
+                            <div class="grid-item">5</div>
+                            <div class="grid-item">6</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💡 Grid é perfeito para:</strong>
+                        <ul>
+                            <li>Galerias de imagens</li>
+                            <li>Layouts de revista</li>
+                            <li>Dashboards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="lesson">
+                    <h2>🌟 Efeitos e Animações</h2>
+                    
+                    <h3>Hover (Efeito ao passar o mouse)</h3>
+                    <div class="code-example">
+<pre>.botao:hover {
+    background-color: red;
+    transform: scale(1.1);     /* Aumenta 10% */
+    transition: all 0.3s;      /* Animação suave */
+}</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Passe o mouse nos botões:</div>
+                        <div style="text-align: center;">
+                            <button class="button-demo">Botão 1</button>
+                            <button class="button-demo">Botão 2</button>
+                            <button class="button-demo">Botão 3</button>
+                        </div>
+                    </div>
+
+                    <h3>Sombras e Bordas Arredondadas</h3>
+                    <div class="code-example">
+<pre>border-radius: 10px;                    /* Cantos arredondados */
+box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Sombra */</pre>
+                    </div>
+
+                    <div class="live-demo">
+                        <div class="live-demo-label">👁️ Exemplos:</div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                            <div style="background: #667eea; color: white; padding: 30px; border-radius: 0px; text-align: center;">
+                                Sem bordas arredondadas
+                            </div>
+                            <div style="background: #764ba2; color: white; padding: 30px; border-radius: 15px; text-align: center;">
+                                border-radius: 15px
+                            </div>
+                            <div style="background: #f093fb; color: white; padding: 30px; border-radius: 50%; text-align: center;">
+                                border-radius: 50% (círculo)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção: Prática -->
+            <div id="pratica" class="section">
+                <div class="lesson">
+                    <h2>🚀 Projetos para Praticar</h2>
+                    
+                    <h3>1. Card de Perfil</h3>
+                    <div class="live-demo">
+                        <div style="max-width: 300px; margin: 0 auto; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 30px; text-align: center; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                            <div style="width: 100px; height: 100px; background: white; border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px;">
+                                👤
+                            </div>
+                            <h2 style="margin: 0 0 10px 0;">João Silva</h2>
+                            <p style="opacity: 0.9;">Desenvolvedor Web</p>
+                            <button style="background: white; color: #667eea; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; margin-top: 15px;">Ver Perfil</button>
+                        </div>
+                    </div>
+
+                    <h3>2. Menu de Navegação</h3>
+                    <div class="live-demo">
+                        <div style="background: #667eea; padding: 20px; border-radius: 10px;">
+                            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+                                <a style="color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border-radius: 5px; transition: background 0.3s;" href="#" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Início</a>
+                                <a style="color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border-radius: 5px; transition: background 0.3s;" href="#" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Sobre</a>
+                                <a style="color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border-radius: 5px; transition: background 0.3s;" href="#" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Serviços</a>
+                                <a style="color: white; text-decoration: none; font-weight: bold; padding: 10px 20px; border-radius: 5px; transition: background 0.3s;" href="#" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='transparent'">Contato</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>3. Galeria de Imagens</h3>
+                    <div class="live-demo">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 150px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🖼️</div>
+                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); height: 150px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🎨</div>
+                            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); height: 150px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">📷</div>
+                            <div style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); height: 150px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🌅</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>🎯 Próximos Passos:</strong>
+                        <ol>
+                            <li>Pratique criando suas próprias páginas</li>
+                            <li>Experimente mudar cores e tamanhos</li>
+                            <li>Combine diferentes elementos</li>
+                            <li>Use ferramentas como CodePen ou VS Code</li>
+                            <li>Consulte documentação: MDN Web Docs, W3Schools</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="lesson">
+                    <h2>📚 Recursos para Continuar Aprendendo</h2>
+                    
+                    <h3>Sites Recomendados:</h3>
+                    <ul>
+                        <li><strong>MDN Web Docs</strong> - Documentação completa e confiável</li>
+                        <li><strong>W3Schools</strong> - Tutoriais e referências práticas</li>
+                        <li><strong>CSS-Tricks</strong> - Dicas e truques de CSS</li>
+                        <li><strong>CodePen</strong> - Para praticar e ver exemplos</li>
+                    </ul>
+
+                    <h3>Dicas Finais:</h3>
+                    <ul>
+                        <li>✅ Pratique todos os dias, mesmo que por 15 minutos</li>
+                        <li>✅ Recrie sites que você gosta</li>
+                        <li>✅ Use as ferramentas de desenvolvedor do navegador (F12)</li>
+                        <li>✅ Não tenha medo de errar - é assim que se aprende!</li>
+                        <li>✅ Comece simples e vá evoluindo aos poucos</li>
+                    </ul>
+                </div>
+
+                <div class="interactive-box" onclick="alert('🎉 Parabéns! Você completou o guia de HTML5 e CSS! Continue praticando e criando projetos incríveis!')">
+                    <h2 style="margin: 0 0 15px 0;">🎊 Clique aqui quando terminar o guia!</h2>
+                    <p style="margin: 0;">Você está no caminho certo para se tornar um desenvolvedor web!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Esconde todas as seções
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active de todas as tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Mostra a seção selecionada
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Marca a tab como ativa
+            event.target.classList.add('active');
+            
+            // Scroll para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

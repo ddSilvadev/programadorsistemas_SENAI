@@ -2,13 +2,36 @@ Aprendendo sobre github
 foi criado a pasta "WEBSITE_IA" com o esqueleto/estrutura básica de um website
 
 tree /f
-WEBSITE_IA - 
+
+WEBSITE_IA
+│   contato.html
 │   index.html
+│   servicos.html
 │
 └───assets
     ├───css
-    │    style.css
+    │       style.css
+    │
     ├───images
-    |   |
+    │       icon_ai.png
+    │       icon_computer.png
+    │       icon_email.png
+    │       icon_lab.png
+    │       icon_phone copy.png
+    │       icon_phone.png
+    │       logo_empresa.png
+    │
     └───javascript
             script.js
+
+
+para aplicar css em classes criada na html usamos .nome-da-classe {} ou * para aplicar css de forma geral (na pagina toda)
+
+estrutura básica:
+
+------
+.nome-do-seletor {
+    propriedade: valor da propriedade
+}
+------
+

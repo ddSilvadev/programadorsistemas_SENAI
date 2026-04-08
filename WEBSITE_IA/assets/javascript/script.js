@@ -9,7 +9,6 @@ const PI = 3.14159;//variavel constante que não irá mudar ao longo da execuç�
 console.log("Olá, meu nome é "+nome+" e eu tenho ", anoAtual - dataNascimento, "anos");
 
 
-
 if (idade < 16){
     console.log("less than 16");
 }
