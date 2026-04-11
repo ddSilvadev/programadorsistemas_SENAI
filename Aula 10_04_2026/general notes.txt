@@ -1,0 +1,52 @@
+Aula dia 10/04/2026
+
+Estamos dando continuidade ao projeto do WEBSITE_IA
+
+Professor apresentou um slide baseado no html-css-guide.html
+
+Execicio:
+
+criar novo arquivo lista.html
+dentro da tag 
+<body>
+    <ol>
+        <li>lista ordenada</>
+    </ol>
+
+    <ul>
+        <li>lista desordenada</>
+    </ul>
+    
+</body>
+
+
+
+Aprendemos sobre algumas tags HTML, como fazer CSS interno e CSS inline
+
+
+O HTML cria a estrutura, mas o visual é pobre e rigido ai que entra o CSS
+
+
+Estrutura basica do CSS e tipos de CSS::
+
+na pagina styles.css, dedicada somente para o CSS permite a criação e mantimento de centenas de items. Opção mais profissional para desenvolvimento
+
+.selector/classe {
+    propriedade: valor;
+    color: #ffffff;
+}
+
+
+
+inline, na propria tag. Conveniente porém mais dificil de manter
+<p style="color: red;"> 
+
+
+CSS interno, no topo da pagina
+<head>
+    <style> 
+        p {color: red;}
+    </style>
+</head>
+
+
