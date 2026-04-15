@@ -28,42 +28,96 @@
     </nav>
 
 
-        <!-- Contatos -->
-        <section class="container-contatos">
+    <!-- Contatos -->
+    <section class="container-contatos">
 
-        <h1 class="text-center">Fale Conosco</h1>
-        <h3 class="text-center">Estamos disponíveis 24/7 para te atender</h3>
+    <h1 class="text-center">Fale Conosco</h1>
+    <h3 class="text-center">Estamos disponíveis 24/7 para te atender</h3>
 
-            <article class="text-center">
-                <img src="assets/images/icon_phone.png" alt="Telefone">
-                <a href="tel:5541992525016" class="contatos">(41) 99252-5016</a>
-                <small>Entre as 09h00 e as 19h00</small>
-            </article>
+        <article class="text-center">
+            <img src="assets/images/icon_phone.png" alt="Telefone">
+            <a href="tel:5541992525016" class="contatos">(41) 99252-5016</a>
+            <small>Entre as 09h00 e as 19h00</small>
+        </article>
 
-            <article class="text-center margin-top-40">
-                <img src="assets/images/icon_email.png" alt="E-mail">
-                <a href="mailto:inteligencia.artificial@ai.com" class="contatos">inteligencia.artificial@ai.com</a>
-                <small>Respondemos a todos os e-mails no prazo de 12 horas.</small>
-            </article>
+        <article class="text-center margin-top-40">
+            <img src="assets/images/icon_email.png" alt="E-mail">
+            <a href="mailto:inteligencia.artificial@ai.com" class="contatos">inteligencia.artificial@ai.com</a>
+            <small>Respondemos a todos os e-mails no prazo de 12 horas.</small>
+        </article>
+    </section>
+
+    <article class="margin-top-40">
+        <h3 class="text-center">Ou envie-nos uma mensagem direta</h3>
+        <form action="" id="form-contato" class="form-contato">
+            
+            <!-- nome -->
+            <div class="grupo-campo">
+                <label for="nome">Nome completo: </label>
+                <input type="text" id="nome" name="nome" placeholder="Digite o seu nome" required>
+            </div>
+
+            <!-- email -->
+            <div class="grupo-campo">
+                <label for="email">E-mail corporativo: </label>
+                <input type="email" id="email" name="email" placeholder="Digite o seu e-mail corporativo" required>
+            </div>
+            
+            <!-- assunto -->
+            <div class="grupo-campo">
+                <label for="assunto">Assunto: </label>
+                    <select name="assunto" id="assunto" required>
+                        <!-- aqui usamos a tag disabled na primeira opção para usar-la como label  -->
+                        <option value="" disabled selected>Selecione um assunto...</option>
+                        <option value="orcamento">Solicitação de orçamento</option>
+                        <option value="suporte">Suporte técnico</option>
+                        <option value="duvida">Dúvida geral</option>
+                    </select>
+            </div>
+
+            <!-- campo de mensagem -->
+            <div class="grupo-campo">
+                <label for="mensagem">Mensagem: </label>
+                <textarea name="mensagem" id="mensagem" rows="5" placeholder="Como podemos te ajudar?" required></textarea>
+            </div>
+
+            <!-- classe para o javascript -->
+            <div id="mensagem-alerta" class="mensagem-alerta">
+
+            </div>
+
+            <!-- botão de Enviar -->
+            <div class="text-center">
+                <button type="submit" class="btn-enviar">Enviar mensagem</button>
+            </div>
+
+        </form>
+    </article>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Quem somos -->
+    <section class="container-quem-somos">
+
+        <!-- Ver mais serviços ou contatos -->
+        <section class="container-servicos-contatos">
+            <h2>
+                Obtenha mais informações na area de serviço e entre em contato conosco
+            </h2>
+            <div class="botoes-servicos-contatos">
+                <a href="servicos.html">Ver Serviços</a>
+            </div>
         </section>
 
-
-
-
-        <!-- Quem somos -->
-        <section class="container-quem-somos">
-
-            <!-- Ver mais serviços ou contatos -->
-            <section class="container-servicos-contatos">
-                <h2>
-                    Obtenha mais informações na area de serviço e entre em contato conosco
-                </h2>
-                <div class="botoes-servicos-contatos">
-                    <a href="servicos.html">Ver Serviços</a>
-                </div>
-            </section>
-
-        </section>
+    </section>
 
     <footer class="footer">
     Inteligência Artificial &copy; 2030 | &reg; Todos os direitos reservados 

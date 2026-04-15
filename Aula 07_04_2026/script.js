@@ -36,4 +36,3 @@ console.log(`Divisão / ${valor1/valor2}`);
 console.log(`Potencia ** ${valor1**valor2}`);
 console.log(`Módulo % ${valor1%valor2}`); //retorna o resto da divisão
 
-
