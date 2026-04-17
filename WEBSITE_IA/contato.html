@@ -27,7 +27,6 @@
         <a href="contato.html">Contato</a>
     </nav>
 
-
     <!-- Contatos -->
     <section class="container-contatos">
 
@@ -49,7 +48,7 @@
 
     <article class="margin-top-40">
         <h3 class="text-center">Ou envie-nos uma mensagem direta</h3>
-        <form action="" id="form-contato" class="form-contato">
+        <form action="" id="form-contato" class="form-contato" novalidate>
             
             <!-- nome -->
             <div class="grupo-campo">
@@ -60,7 +59,7 @@
             <!-- email -->
             <div class="grupo-campo">
                 <label for="email">E-mail corporativo: </label>
-                <input type="email" id="email" name="email" placeholder="Digite o seu e-mail corporativo" required>
+                <input type="email" id="email" name="email" autocomplete placeholder="Digite o seu e-mail corporativo" required>
             </div>
             
             <!-- assunto -->
@@ -94,16 +93,6 @@
         </form>
     </article>
 
-
-
-
-
-
-
-
-
-
-
     <!-- Quem somos -->
     <section class="container-quem-somos">
 
@@ -122,5 +111,6 @@
     <footer class="footer">
     Inteligência Artificial &copy; 2030 | &reg; Todos os direitos reservados 
     </footer>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
