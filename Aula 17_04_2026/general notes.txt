@@ -1,0 +1,101 @@
+Aula dia 17/04/2026
+
+Aprendendo sobre o git 
+Já uso git, 2 perfis com SSH
+
+Notas apenas para highlight e cheat sheet
+
+
+-----------------------------------------
+*Configuração inicial*
+git config --global user.name "Seu Nome" (como usso SSH com 2 profiles, não é nescessario)
+git config --global user.email "seu@email.com"
+git config --list        # Ver configurações
+
+
+-----------------------------------------
+*Criar / Clonar repositório*
+git init                 # Inicializa um repositório
+git clone <url>          # Clona um repositório remoto
+
+
+-----------------------------------------
+*Status e diferenças*
+git status               # Estado atual (arquivos modificados, staged, etc.)
+git diff                 # Diferenças não adicionadas
+git diff --staged        # Diferenças já adicionadas (staging)
+
+
+-----------------------------------------
+*Adicionar e commitar*
+git add <arquivo>        # Adiciona arquivo ao staging
+git add .                # Adiciona tudo
+
+git commit -m "mensagem" # Cria commit
+git commit -am "msg"     # Add + commit (somente arquivos rastreados)
+
+
+-----------------------------------------
+*Histórico*
+git log                  # Histórico completo
+git log --oneline        # Resumido
+git log --graph          # Visual com branches
+
+
+-----------------------------------------
+*Branches*
+git branch               # Lista branches
+git branch <nome>        # Cria nova branch
+git checkout <nome>      # Troca de branch
+git checkout -b <nome>   # Cria e troca
+
+git merge <branch>       # Faz merge na branch atual
+
+
+-----------------------------------------
+*Atualizar repositório*
+git pull                 # Baixa e aplica mudanças
+git fetch                # Baixa sem aplicar
+
+
+-----------------------------------------
+*Enviar para remoto*
+git push                 # Envia commits
+git push origin <branch> # Envia branch específica
+
+
+-----------------------------------------
+*Remoto*
+git remote -v            # Lista remotos
+git remote add origin <url>
+
+
+-----------------------------------------
+*Desfazer coisas*
+git restore <arquivo>          # Descarta mudanças (working dir)
+git restore --staged <arquivo> # Remove do staging
+
+git reset --soft HEAD~1        # Remove commit, mantém mudanças
+git reset --hard HEAD~1        # Remove commit + mudanças
+
+git revert <commit>            # Cria commit que desfaz outro
+
+
+-----------------------------------------
+*Limpeza*
+git clean -fd             # Remove arquivos não rastreados 
+
+
+-----------------------------------------
+*Tags*
+git tag                   # Lista tags
+git tag <nome>            # Cria tag
+git push origin <tag>     # Envia tag
+
+
+-----------------------------------------
+*Dicas*
+HEAD = commit atual
+origin = remoto padrão
+main ou master = branch principal
+Use --help em qualquer comando: git commit --help
