@@ -5,4 +5,5 @@ Mais info https://github.com/ddSilvadev/projeto_senai/blob/main/general%20notes.
 
 
 
-Professor mudou de idea: continuaremos com 
+Professor mudou de idea: continuaremos com o módulo de html, js e css (WEBSITE_IA)
+
