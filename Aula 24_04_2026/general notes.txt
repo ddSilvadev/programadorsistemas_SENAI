@@ -7,3 +7,10 @@ Mais info https://github.com/ddSilvadev/projeto_senai/blob/main/general%20notes.
 
 Professor mudou de idea: continuaremos com o módulo de html, js e css (WEBSITE_IA)
 
+Revisão sobre git e github porque alguns alunos estão atrasados no conteudo
+
+(veja "git cheat sheet.txt")
+
+Foi feito uma repo no github e o "WEBSITE_IA" foi upado para essa repo (não fiz pois já tenho um conhecimento sobre e mantenho uma do curso completo)
+
+
