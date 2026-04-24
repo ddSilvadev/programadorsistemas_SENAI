@@ -278,3 +278,9 @@ body {
 
 .alerta-erro { color: #d9534f; display: block; }
 .alerta-sucesso { color: #5cb85c; display: block; }
+
+
+.artigo-contato {
+    margin-top: 40px;
+    margin-bottom: 56px;
+}
