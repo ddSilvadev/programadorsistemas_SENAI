@@ -5,6 +5,11 @@ Já uso git, 2 perfis com SSH
 
 Notas apenas para highlight e cheat sheet
 
+fluxo de uso básico:
+
+editar arquivos > git add <arquivo alterado> > git commit -m "mensagem com descrição de mudanças" > git push
+
+
 
 -----------------------------------------
 *Configuração inicial*

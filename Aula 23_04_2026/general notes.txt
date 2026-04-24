@@ -1,1 +1,8 @@
 Continuação git e github
+
+
+criado nova repo "projeto_senai" (tentei usar submodule mas me dei mal, culpo o windows)
+https://github.com/ddSilvadev/projeto_senai
+
+
+vimos pouca coisa sobre python (tkinter) como exemplo
