@@ -11,3 +11,4 @@ Revisão sobre git e github porque alguns alunos estão atrasados no conteudo
 Foi feito uma repo no github e o "WEBSITE_IA" foi upado para essa repo (não fiz pois já tenho um conhecimento sobre e mantenho uma do curso completo)
 
 
+Fim
