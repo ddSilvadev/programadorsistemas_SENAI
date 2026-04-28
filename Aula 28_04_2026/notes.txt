@@ -1,0 +1,11 @@
+Estamos vendo um pouco mais sobre lógica de programação.
+
+Hoje estamos vendo sobre funções usando python
+
+
+toda função no python vai ter nome e parenteses para colocar parametos
+
+funcao(param)
+nome = "test"
+print(nome)
+
