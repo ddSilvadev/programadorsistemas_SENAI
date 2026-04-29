@@ -1,11 +1,62 @@
 Estamos vendo um pouco mais sobre lógica de programação.
 
-Hoje estamos vendo sobre funções usando python
+Hoje estamos vendo sobre funções usando python, váriaveis, escopos *Args, **Kwargs
 
 
-toda função no python vai ter nome e parenteses para colocar parametos
+toda função no python vai ter nome e parenteses para colocar parametos funcao(param)
 
-funcao(param)
-nome = "test"
-print(nome)
+
+Funções são comandos personalizados que criamos para não repetir código. Assim como o python já tem print() e input()
+
+
+def nome_funcao(entrada): 
+ |     |            | parameters
+ |     |
+ |     | identidade
+ |
+ keyword
+
+Keyword = avisa o python que o uma nova função vai nascer
+identidade = sem espaços e sem numeros
+parameters = por onde os dados entram
+
+
+
+Escopo: Local vs Global
+
+O que nasce na função, morre na função (Local). Váriaveis criada fora da função podem ser lidas em qualquer lugar (Global)
+
+
+
+Eentradas: Diferença entre parametros e argumentos
+
+argumentos = dados reais enviados
+parametros = espaços reservados(váriaveis)
+
+parametros são os buracos da maquina, argumentos sao as moedas reais que fazem a maquina girar. Se faltar moeda, a maquina acusa erro
+
+
+Saidas: capturar o valor com return
+
+Dentro da função 
+print(resultado) exibe no terminal e descarta da memoria
+return resultado devolve o valor de resultado intacto, possibilitando o uso em variaveis ou outras funções
+
+
+
+
+Parâmetros Dinâmicos: O Empacotador *args
+
+def calcular_media(*numero):
+
+def somar_tudo(*numeros):
+    return sum(numeros)
+
+print(somar_tudo(1, 2))
+print(somar_tudo(45, 45, 2, 10))
+
+O asterisco dá liberdade total. Ele avisa o Python para interceptar quantos argumentos soltos forem enviados e
+empacotar todos em uma única Tupia estruturada, pronta para ser processada por um loop for.
+
+
 
