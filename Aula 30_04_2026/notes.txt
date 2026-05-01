@@ -1,0 +1,14 @@
+Aula dia 30/04/2026
+
+
+vendo um pouco sobre pycharm enquando damos continuidade ao projeto de MP3 Player com python
+
+------
+Criar virtual enviroment para não precisar instalar bibliotecas no sistema todo:
+
+python3 -m venv [nome_do_projeto]
+
+
+
+
+
