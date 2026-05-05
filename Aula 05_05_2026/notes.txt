@@ -1,0 +1,22 @@
+Continuamos vendo Pycharm/projeto MP3 Player
+
+Vendo um pouco sobre Django and Flask
+
+GUI - Graphical User Interface
+Interface Gráfica do usuário
+ 
+tkinter nativo -> Local
+ 
+Desenvolvimento Web 
+Framework
+flask -> Web
+django -> Web 
+ 
+pyside6 -> Local
+
+
+
+Iniciamos um projeto de slots para aprender tkinter
+
+
+
