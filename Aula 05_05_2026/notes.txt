@@ -16,7 +16,17 @@ pyside6 -> Local
 
 
 
-Iniciamos um projeto de slots para aprender tkinter
+Iniciamos um projeto de slots
+https://github.com/ddSilvadev/projeto_senai/blob/main/Slots_terminal.py
+
+Usamos a biblioteca padrão random para introduzir aleatoriedade no jogo, especificamente com random.choice, que seleciona um símbolo aleatório da lista a cada giro. Para repetir essa seleção três vezes, utilizamos range(3), que gera uma sequência de três iterações, combinada com uma list comprehension, uma forma compacta de construir listas, criando assim os três resultados de cada rodada.
+
+Para exibir os símbolos de forma organizada, utilizamos o método " | ".join(lista), que transforma a lista de resultados em uma única string separada por " | ". A verificação de vitória é feita com uma comparação encadeada (a == b == c), que permite checar de forma direta se todos os elementos são iguais.
 
 
+Projeto de carrinho de compras 
+https://github.com/ddSilvadev/projeto_senai/blob/main/carrinho_de_compras.py
+
+
+Foi desenvolvido um aplicativo simples de carrinho de compras com interface gráfica. O usuário pode inserir o nome do item, o preço e a quantidade, adicionando esses dados a uma lista visível na tela. A cada item adicionado, o sistema calcula automaticamente o subtotal e atualiza o valor total da compra. Também há validação básica para evitar entradas inválidas e uma opção para finalizar a compra, exibindo o total acumulado.
 
