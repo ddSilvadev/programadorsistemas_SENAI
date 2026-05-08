@@ -1,0 +1,15 @@
+Continuação Pycharm e Tkinter
+
+Link do exercicio: https://github.com/ddSilvadev/projeto_senai/blob/main/Projetos/ComprasV2.py
+
+Link das Anotações: https://github.com/ddSilvadev/projeto_senai/blob/main/Projetos/ComprasV2.txt
+
+
+
+
+Outro exercicio (com modulo random)
+
+https://github.com/ddSilvadev/projeto_senai/blob/main/Projetos/jogo_adivinhacao.py
+
+
+
