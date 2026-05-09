@@ -1,1 +1,5 @@
-gi
+Exercicio com biblioteca random, time, sys e tkinter
+
+https://github.com/ddSilvadev/projeto_senai/blob/main/Projetos/temporizador_regressivo.py
+https://github.com/ddSilvadev/projeto_senai/blob/main/Projetos/rolador_de_dados.py
+https://github.com/ddSilvadev/projeto_senai/blob/main/Projetos/calc_juros.py
