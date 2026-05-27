@@ -12,6 +12,13 @@ Campo (coluna): representa um tipo de dado da tabela.
 Chave Primária (Primary Key): identifica cada registro de forma única.
 Consulta (Query): comando usado para buscar informações.
 
+
+
+
+
+
+
+
 -- Principais Comandos SQL --
 
 SELECT → consulta dados.
@@ -29,3 +36,57 @@ FROM alunos
 WHERE idade >= 18;
 
 Esse comando mostra o nome e a idade dos alunos maiores de 18 anos.
+
+
+
+Na shell do MySQL:
+
+\sql para mudar do modo JS para SQL
+\connect root@localhost
+
+CREATE DATABASE escola;
+
+------
+USE escola; # Seleciona o database "escola"
+
+# Cria a tabela "alunos" com nome e idade
+CREATE TABLE alunos (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nome VARCHAR(100),
+	idade INT
+);
+
+
+-------
+# insere/adiciona um nome e idade para a tabela de alunos
+INSERT INTO alunos (nome,idade)
+VALUES ('Carlo', 30);
+
+INSERT INTO alunos (nome,idade)
+VALUES ('Roberto', 25);
+
+
+------
+# insere/adiciona multiplos nomes e idades para a tabela de alunos
+INSERT INTO alunos (nome,idade)
+VALUES
+('Issac', 14),
+('Leticia', 34),
+('Aleks', 27),
+('Miguel', 22)
+
+
+-----------
+# Mostrar resultado
+SELECT * FROM escola.alunos;
+
++----+---------+-------+
+| id | nome    | idade |
++----+---------+-------+
+|  1 | Carlo   |    30 |
+|  2 | Roberto |    25 |
+|  3 | Issac   |    14 |
+|  4 | Leticia |    34 |
+|  5 | Aleks   |    27 |
+|  6 | Miguel  |    22 |
++----+---------+-------+
