@@ -1,0 +1,48 @@
+Aula 29/05/2026
+
+
+
+https://www.jetbrains.com/pt-br/datagrip/
+
+
+
+
+
+-- Puxar o ID do aluno Pedro
+SELECT id_aluno FROM aluno WHERE nome = 'Pedro Henrique Melo';
+
+
+----------
+-- Seleciona o nome do aluno, o nome do curso e a nota obtida
+SELECT a.nome, c.nome_curso, m.nota
+
+-- Define a tabela aluno como tabela principal e usa o apelido "a"
+FROM aluno a
+
+-- Junta a tabela matricula à tabela aluno
+-- Relaciona cada matrícula ao aluno correspondente através do id_aluno
+JOIN matricula m ON a.id_aluno = m.id_aluno
+
+-- Junta a tabela curso à tabela matricula
+-- Relaciona cada matrícula ao curso correspondente através do id_curso
+JOIN curso c ON c.id_curso = m.id_curso;
+
+Em resumo, essa consulta:
+
+1. Começa pela tabela aluno.
+2. Busca as matrículas de cada aluno na tabela matricula.
+3. Busca os cursos correspondentes na tabela curso.
+4. Exibe:
+    Nome do aluno (a.nome)
+    Nome do curso (c.nome_curso)
+    Nota do aluno naquele curso (m.nota)
+
+Exemplo de resultado:
+
+nome      | nome_curso           | nota
+-----------+----------------------+------
+João      | Banco de Dados       | 8.5
+Maria     | Lógica Programação   | 9.0
+Pedro     | Programação em Java  | 7.5
+
+Cada linha representa uma matrícula de um aluno em um curso e a respectiva nota registrada.
