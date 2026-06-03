@@ -1,0 +1,148 @@
+Cardionalidade
+
+A cardinalidade permite expressar o número de ocorrências com que uma entidade pode tomar parte em um relacionamento. Permite também expressar as possibilidades e restrições de associações entre uma entidade e outra. Podemos também definir como a "regra de negócio" entre as entidades envolvidas no relacionamento ou até mesmo a frequência com que essas funcionalidades podem ocorrer.
+
+
+Trata-se do limite máximo de ocorrências de uma entidade em relação à outra:
+Um para Um (1:1).
+Um para Muitos (I:N).
+Muitos para Muitos (N:N) ou N:N.
+
+
+Cardinalidade Um para Um (1:1):
+Acontece quando a ocorrência de uma entidade se relaciona com (no máximo) uma ocorrência de outra e vice-versa.
+Exemplo:
+Leitura direta: o Cliente compra no máximo 1 Produto
+Leitura inversa: 1 Produto é comprado pelo Cliente
+
+
+Cardinalidade Um para Muitos (I:N):
+A ocorrência de uma entidade se relaciona com (no máximo) muitas ocorrências de outra, porém a ocorrência de outra entidade se relaciona com (no máximo) uma ocorrência da primeira.
+
+Leitura direta: o Cliente compra no máximo muitos Produtos
+Leitura inversa: o Produto é comprado por no máximo um Cliente
+
+
+
+
+---------------------
+-- Criação do banco de dados da loja
+CREATE DATABASE db_loja CHAR SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Tabela que armazena os clientes da loja
+CREATE TABLE cliente (
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    cidade VARCHAR(60),
+    dt_cadastro DATE
+);
+
+-- Tabela que armazena os pedidos realizados pelos clientes
+CREATE TABLE pedido (
+    id_pedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT,
+    data_pedido DATE,
+    status VARCHAR(30)
+);
+
+-- Ajustes na estrutura da tabela pedido
+ALTER TABLE pedido
+    MODIFY COLUMN id_cliente INT NOT NULL,
+    MODIFY COLUMN data_pedido DATE DEFAULT (CURRENT_DATE),
+    MODIFY COLUMN status VARCHAR(30) DEFAULT 'pendente',
+
+    -- Criação da chave estrangeira que liga pedido a cliente
+    ADD CONSTRAINT fk_pedido_cliente
+    FOREIGN KEY (id_cliente)
+    REFERENCES cliente(id_cliente);
+
+-- Cardinalidade Cliente x Pedido (1:N)
+-- Leitura direta:
+-- Um cliente pode realizar vários pedidos.
+--
+-- Leitura inversa:
+-- Um pedido pertence a apenas um cliente.
+--
+-- A chave estrangeira id_cliente na tabela pedido
+-- implementa esse relacionamento.
+
+-- Tabela que armazena os itens de cada pedido
+CREATE TABLE item_pedido (
+    id_item INT PRIMARY KEY AUTO_INCREMENT,
+    id_pedido INT,
+    id_produto INT,
+    quantidade INT,
+    preco_unit DECIMAL
+);
+
+-- Tabela que armazena os produtos
+CREATE TABLE produto (
+id_produto INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(100) NOT NULL,
+preco DECIMAL(10,2) NOT NULL, #10 = total de digitos, 2 = quantas casas decimais
+estoque INT
+);
+
+
+
+
+
+
+Cardinalidade Pedido x Item_Pedido (1:N)Leitura direta:
+Um pedido pode possuir vários itens.
+Leitura inversa:
+Um item pertence a apenas um pedido.
+O campo id_pedido será utilizado como chave
+estrangeira para representar esse relacionamento.
+
+Cardinalidade Produto x Item_Pedido (1:N)
+Leitura direta:
+Um produto pode aparecer em vários itens de pedido.
+Leitura inversa:
+Um item de pedido refere-se a apenas um produto.
+O campo id_produto será utilizado como chave
+estrangeira para representar esse relacionamento.
+
+Cardinalidade Pedido x Produto (N:N)
+Leitura direta:
+Um pedido pode conter vários produtos.
+Leitura inversa:
+Um produto pode estar presente em vários pedidos.
+Esse relacionamento muitos para muitos é resolvido
+pela tabela associativa item_pedido.
+
+
+
+
+
+
+O ponto mais importante nesse modelo é destacar que:
+
+    Cliente -> Pedido = 1:N
+    Pedido -> Item_Pedido = 1:N
+    Produto -> Item_Pedido = 1:N
+    Pedido <-> Produto = N:N, resolvido pela tabela item_pedido.
+
+
+
+ALTER TABLE:
+
+O comando ALTER TABLE é utilizado para alterar a estrutura de uma tabela já existente. Com ele é possível adicionar, remover ou modificar colunas e restrições.
+
+Exemplo:
+
+    ALTER TABLE cliente
+    ADD COLUMN telefone VARCHAR(20);
+    
+
+MODIFY COLUMN:
+
+O comando MODIFY COLUMN é usado dentro do ALTER TABLE para alterar as características de uma coluna, como tipo de dado, tamanho, valor padrão (DEFAULT) ou restrições (NOT NULL).
+
+Exemplo:
+
+    ALTER TABLE pedido
+    MODIFY COLUMN status VARCHAR(30) DEFAULT 'pendente';
+
+No script da loja, ALTER TABLE foi utilizado para modificar a tabela pedido, enquanto MODIFY COLUMN definiu restrições e valores padrão para algumas colunas.
