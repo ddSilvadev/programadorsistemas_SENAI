@@ -1,0 +1,223 @@
+Revisão do modulo usando o script abaixo.
+
+SELECT, FROM, WHERE, JOIN keywords
+
+
+-- Script SQL completo para criação e população do banco de dados didático "loja_virtual"
+-- Criado para prática de SELECT, JOINs, ORDER BY e funções matemáticas
+-- Com suporte a UTF8MB4 e collation utf8mb4_0900_ai_ci
+-- Datas no formato brasileiro (dia-mês-ano)
+-- Versão compatível com MySQL Workbench 8.0+
+
+-- Criação do banco de dados
+DROP DATABASE IF EXISTS loja_virtual;
+CREATE DATABASE loja_virtual 
+    CHARACTER SET utf8mb4 
+    COLLATE utf8mb4_0900_ai_ci;
+USE loja_virtual;
+
+-- Tabela Clientes
+CREATE TABLE Clientes (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    data_nascimento DATE,
+    cidade VARCHAR(50),
+    estado CHAR(2),
+    limite_credito DECIMAL(10, 2) DEFAULT 0.00,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela Categorias
+CREATE TABLE Categorias (
+    id_categoria INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    descricao VARCHAR(200)
+);
+
+-- Tabela Produtos
+CREATE TABLE Produtos (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    descricao VARCHAR(200),
+    preco DECIMAL(10, 2) NOT NULL,
+    estoque INT NOT NULL DEFAULT 0,
+    id_categoria INT,
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_categoria) REFERENCES Categorias(id_categoria)
+);
+
+-- Tabela Funcionarios (com auto-relacionamento)
+CREATE TABLE Funcionarios (
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL,
+    data_contratacao DATE NOT NULL,
+    id_supervisor INT,
+    FOREIGN KEY (id_supervisor) REFERENCES Funcionarios(id_funcionario)
+);
+
+-- Tabela Pedidos
+CREATE TABLE Pedidos (
+    id_pedido INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    data_pedido DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(20) DEFAULT 'Em processamento',
+    valor_frete DECIMAL(8, 2) DEFAULT 0.00,
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente)
+);
+
+-- Tabela Itens_Pedido
+CREATE TABLE Itens_Pedido (
+    id_item INT AUTO_INCREMENT PRIMARY KEY,
+    id_pedido INT NOT NULL,
+    id_produto INT NOT NULL,
+    quantidade INT NOT NULL,
+    preco_unitario DECIMAL(10, 2) NOT NULL,
+    desconto DECIMAL(8, 2) DEFAULT 0.00,
+    FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido),
+    FOREIGN KEY (id_produto) REFERENCES Produtos(id_produto)
+);
+
+-- Criação de índices para melhorar performance
+CREATE INDEX idx_cliente_nome ON Clientes(nome);
+CREATE INDEX idx_produto_nome ON Produtos(nome);
+CREATE INDEX idx_pedido_data ON Pedidos(data_pedido);
+CREATE INDEX idx_pedido_status ON Pedidos(status);
+
+-- Inserção de dados na tabela Categorias
+INSERT INTO Categorias (nome, descricao) VALUES
+('Eletrônicos', 'Produtos eletrônicos e gadgets'),
+('Informática', 'Computadores, notebooks e acessórios'),
+('Celulares', 'Smartphones e acessórios'),
+('Eletrodomésticos', 'Produtos para casa'),
+('Móveis', 'Móveis para casa e escritório'),
+('Livros', 'Livros de diversos gêneros'),
+('Esportes', 'Artigos esportivos'),
+('Moda', 'Roupas e acessórios');
+
+-- Inserção de dados na tabela Clientes (datas convertidas)
+INSERT INTO Clientes (nome, email, data_nascimento, cidade, estado, limite_credito, data_cadastro) VALUES
+('Maria Silva', 'maria.silva@email.com', STR_TO_DATE('15-05-1985', '%d-%m-%Y'), 'São Paulo', 'SP', 5000.00, STR_TO_DATE('10-01-2022 14:30:00', '%d-%m-%Y %H:%i:%s')),
+('João Santos', 'joao.santos@email.com', STR_TO_DATE('22-08-1990', '%d-%m-%Y'), 'Rio de Janeiro', 'RJ', 3000.00, STR_TO_DATE('15-01-2022 10:45:00', '%d-%m-%Y %H:%i:%s')),
+('Ana Oliveira', 'ana.oliveira@email.com', STR_TO_DATE('03-12-1978', '%d-%m-%Y'), 'Belo Horizonte', 'MG', 7500.00, STR_TO_DATE('05-02-2022 16:20:00', '%d-%m-%Y %H:%i:%s')),
+('Carlos Pereira', 'carlos.pereira@email.com', STR_TO_DATE('19-07-1982', '%d-%m-%Y'), 'Curitiba', 'PR', 4000.00, STR_TO_DATE('10-02-2022 09:15:00', '%d-%m-%Y %H:%i:%s')),
+('Juliana Costa', 'juliana.costa@email.com', STR_TO_DATE('27-03-1995', '%d-%m-%Y'), 'Salvador', 'BA', 2500.00, STR_TO_DATE('01-03-2022 11:30:00', '%d-%m-%Y %H:%i:%s')),
+('Roberto Almeida', 'roberto.almeida@email.com', STR_TO_DATE('08-11-1975', '%d-%m-%Y'), 'Brasília', 'DF', 10000.00, STR_TO_DATE('15-03-2022 14:00:00', '%d-%m-%Y %H:%i:%s')),
+('Fernanda Lima', 'fernanda.lima@email.com', STR_TO_DATE('14-09-1988', '%d-%m-%Y'), 'Fortaleza', 'CE', 3500.00, STR_TO_DATE('02-04-2022 15:45:00', '%d-%m-%Y %H:%i:%s')),
+('Ricardo Souza', 'ricardo.souza@email.com', STR_TO_DATE('30-04-1992', '%d-%m-%Y'), 'Recife', 'PE', 4500.00, STR_TO_DATE('10-04-2022 13:20:00', '%d-%m-%Y %H:%i:%s')),
+('Patricia Martins', 'patricia.martins@email.com', STR_TO_DATE('25-01-1980', '%d-%m-%Y'), 'Porto Alegre', 'RS', 6000.00, STR_TO_DATE('05-05-2022 10:10:00', '%d-%m-%Y %H:%i:%s')),
+('Marcelo Ferreira', 'marcelo.ferreira@email.com', STR_TO_DATE('12-06-1993', '%d-%m-%Y'), 'Manaus', 'AM', 3000.00, STR_TO_DATE('20-05-2022 16:30:00', '%d-%m-%Y %H:%i:%s')),
+('Camila Rodrigues', 'camila.rodrigues@email.com', STR_TO_DATE('18-02-1987', '%d-%m-%Y'), 'São Paulo', 'SP', 5500.00, STR_TO_DATE('01-06-2022 09:45:00', '%d-%m-%Y %H:%i:%s')),
+('Lucas Barbosa', 'lucas.barbosa@email.com', STR_TO_DATE('05-10-1991', '%d-%m-%Y'), 'Rio de Janeiro', 'RJ', 4000.00, STR_TO_DATE('15-06-2022 14:15:00', '%d-%m-%Y %H:%i:%s')),
+('Amanda Cardoso', 'amanda.cardoso@email.com', STR_TO_DATE('09-08-1984', '%d-%m-%Y'), 'Belo Horizonte', 'MG', 7000.00, STR_TO_DATE('03-07-2022 11:00:00', '%d-%m-%Y %H:%i:%s')),
+('Bruno Gomes', 'bruno.gomes@email.com', STR_TO_DATE('21-12-1989', '%d-%m-%Y'), 'Curitiba', 'PR', 3800.00, STR_TO_DATE('18-07-2022 15:30:00', '%d-%m-%Y %H:%i:%s')),
+('Larissa Mendes', 'larissa.mendes@email.com', STR_TO_DATE('07-07-1994', '%d-%m-%Y'), 'Salvador', 'BA', 2800.00, STR_TO_DATE('02-08-2022 10:20:00', '%d-%m-%Y %H:%i:%s'));
+
+-- Inserção de dados na tabela Produtos
+INSERT INTO Produtos (nome, descricao, preco, estoque, id_categoria, data_cadastro) VALUES
+('Smartphone XYZ', 'Smartphone com 128GB de memória', 2499.99, 50, 3, STR_TO_DATE('05-01-2022 09:00:00', '%d-%m-%Y %H:%i:%s')),
+('Notebook ABC', 'Notebook com processador i7', 4999.99, 30, 2, STR_TO_DATE('10-01-2022 10:30:00', '%d-%m-%Y %H:%i:%s')),
+('Smart TV 55"', 'Smart TV LED 4K', 3299.99, 25, 1, STR_TO_DATE('15-01-2022 14:45:00', '%d-%m-%Y %H:%i:%s')),
+('Fone de Ouvido Bluetooth', 'Fone sem fio com cancelamento de ruído', 299.99, 100, 1, STR_TO_DATE('01-02-2022 11:20:00', '%d-%m-%Y %H:%i:%s')),
+('Geladeira Frost Free', 'Geladeira duplex 400L', 3599.99, 15, 4, STR_TO_DATE('10-02-2022 16:00:00', '%d-%m-%Y %H:%i:%s')),
+('Sofá 3 Lugares', 'Sofá retrátil e reclinável', 1899.99, 10, 5, STR_TO_DATE('20-02-2022 13:15:00', '%d-%m-%Y %H:%i:%s')),
+('Livro de Programação', 'Aprenda SQL do básico ao avançado', 89.99, 80, 6, STR_TO_DATE('05-03-2022 10:45:00', '%d-%m-%Y %H:%i:%s')),
+('Bicicleta Mountain Bike', 'Bicicleta aro 29 com 21 marchas', 1299.99, 20, 7, STR_TO_DATE('15-03-2022 15:30:00', '%d-%m-%Y %H:%i:%s')),
+('Camiseta Esportiva', 'Camiseta dry fit para esportes', 79.99, 150, 8, STR_TO_DATE('01-04-2022 09:10:00', '%d-%m-%Y %H:%i:%s')),
+('Mouse Gamer', 'Mouse com 6 botões e LED RGB', 149.99, 70, 2, STR_TO_DATE('10-04-2022 14:00:00', '%d-%m-%Y %H:%i:%s')),
+('Ar Condicionado Split', 'Ar condicionado 12000 BTUs', 1799.99, 18, 4, STR_TO_DATE('20-04-2022 11:45:00', '%d-%m-%Y %H:%i:%s')),
+('Mesa de Escritório', 'Mesa com gavetas para escritório', 599.99, 25, 5, STR_TO_DATE('05-05-2022 16:20:00', '%d-%m-%Y %H:%i:%s')),
+('Livro de Ficção', 'Best-seller internacional', 49.99, 120, 6, STR_TO_DATE('15-05-2022 10:00:00', '%d-%m-%Y %H:%i:%s')),
+('Tênis de Corrida', 'Tênis leve para corrida', 299.99, 60, 7, STR_TO_DATE('25-05-2022 13:30:00', '%d-%m-%Y %H:%i:%s')),
+('Relógio Inteligente', 'Smartwatch com monitor cardíaco', 899.99, 40, 1, STR_TO_DATE('05-06-2022 15:15:00', '%d-%m-%Y %H:%i:%s')),
+('Tablet 10"', 'Tablet com 64GB de armazenamento', 1499.99, 35, 3, STR_TO_DATE('15-06-2022 09:45:00', '%d-%m-%Y %H:%i:%s')),
+('Cafeteira Elétrica', 'Cafeteira programável', 249.99, 45, 4, STR_TO_DATE('25-06-2022 14:30:00', '%d-%m-%Y %H:%i:%s')),
+('Cadeira Gamer', 'Cadeira ergonômica para gamers', 999.99, 20, 5, STR_TO_DATE('05-07-2022 11:00:00', '%d-%m-%Y %H:%i:%s')),
+('Livro de Negócios', 'Estratégias para empreendedores', 69.99, 90, 6, STR_TO_DATE('15-07-2022 16:45:00', '%d-%m-%Y %H:%i:%s')),
+('Bola de Futebol', 'Bola oficial de futebol', 129.99, 75, 7, STR_TO_DATE('25-07-2022 10:30:00', '%d-%m-%Y %H:%i:%s'));
+
+-- Inserção de dados na tabela Funcionarios
+INSERT INTO Funcionarios (nome, cargo, salario, data_contratacao, id_supervisor) VALUES
+('Roberto Carlos', 'Diretor Geral', 15000.00, STR_TO_DATE('15-01-2020', '%d-%m-%Y'), NULL),
+('Mariana Santos', 'Gerente de Vendas', 8500.00, STR_TO_DATE('10-02-2020', '%d-%m-%Y'), 1),
+('Paulo Oliveira', 'Gerente de TI', 8500.00, STR_TO_DATE('05-03-2020', '%d-%m-%Y'), 1),
+('Cristina Lima', 'Gerente Financeiro', 8500.00, STR_TO_DATE('20-04-2020', '%d-%m-%Y'), 1),
+('Eduardo Silva', 'Vendedor', 3500.00, STR_TO_DATE('10-01-2021', '%d-%m-%Y'), 2),
+('Fernanda Costa', 'Vendedor', 3500.00, STR_TO_DATE('15-02-2021', '%d-%m-%Y'), 2),
+('Gabriel Martins', 'Vendedor', 3500.00, STR_TO_DATE('20-03-2021', '%d-%m-%Y'), 2),
+('Henrique Souza', 'Analista de TI', 4500.00, STR_TO_DATE('25-04-2021', '%d-%m-%Y'), 3),
+('Isabela Ferreira', 'Analista de TI', 4500.00, STR_TO_DATE('30-05-2021', '%d-%m-%Y'), 3),
+('Juliana Alves', 'Contador', 4000.00, STR_TO_DATE('05-06-2021', '%d-%m-%Y'), 4);
+
+-- Inserção de dados na tabela Pedidos
+INSERT INTO Pedidos (id_cliente, data_pedido, status, valor_frete) VALUES
+(1, STR_TO_DATE('05-01-2023 10:30:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 25.00),
+(2, STR_TO_DATE('10-01-2023 14:45:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 30.00),
+(3, STR_TO_DATE('15-01-2023 09:15:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 15.00),
+(4, STR_TO_DATE('01-02-2023 16:20:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 20.00),
+(5, STR_TO_DATE('10-02-2023 11:30:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 25.00),
+(6, STR_TO_DATE('20-02-2023 13:45:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 0.00),
+(7, STR_TO_DATE('05-03-2023 15:10:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 18.00),
+(8, STR_TO_DATE('15-03-2023 10:25:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 22.00),
+(9, STR_TO_DATE('01-04-2023 14:00:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 0.00),
+(10, STR_TO_DATE('10-04-2023 09:30:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 15.00),
+(1, STR_TO_DATE('20-04-2023 16:45:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 25.00),
+(2, STR_TO_DATE('05-05-2023 11:15:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 30.00),
+(3, STR_TO_DATE('15-05-2023 13:30:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 0.00),
+(4, STR_TO_DATE('25-05-2023 10:00:00', '%d-%m-%Y %H:%i:%s'), 'Entregue', 20.00),
+(5, STR_TO_DATE('05-06-2023 15:45:00', '%d-%m-%Y %H:%i:%s'), 'Enviado', 25.00),
+(6, STR_TO_DATE('15-06-2023 09:20:00', '%d-%m-%Y %H:%i:%s'), 'Enviado', 0.00),
+(7, STR_TO_DATE('25-06-2023 14:10:00', '%d-%m-%Y %H:%i:%s'), 'Enviado', 18.00),
+(8, STR_TO_DATE('05-07-2023 11:30:00', '%d-%m-%Y %H:%i:%s'), 'Em processamento', 22.00),
+(9, STR_TO_DATE('15-07-2023 16:00:00', '%d-%m-%Y %H:%i:%s'), 'Em processamento', 0.00),
+(10, STR_TO_DATE('25-07-2023 10:15:00', '%d-%m-%Y %H:%i:%s'), 'Em processamento', 15.00),
+(11, STR_TO_DATE('01-08-2023 13:45:00', '%d-%m-%Y %H:%i:%s'), 'Em processamento', 20.00),
+(12, STR_TO_DATE('05-08-2023 09:30:00', '%d-%m-%Y %H:%i:%s'), 'Em processamento', 25.00),
+(13, STR_TO_DATE('10-08-2023 15:20:00', '%d-%m-%Y %H:%i:%s'), 'Cancelado', 0.00),
+(14, STR_TO_DATE('15-08-2023 11:00:00', '%d-%m-%Y %H:%i:%s'), 'Cancelado', 22.00),
+(15, STR_TO_DATE('20-08-2023 14:30:00', '%d-%m-%Y %H:%i:%s'), 'Cancelado', 18.00);
+
+-- Inserção de dados na tabela Itens_Pedido
+INSERT INTO Itens_Pedido (id_pedido, id_produto, quantidade, preco_unitario, desconto) VALUES
+(1, 1, 1, 2499.99, 0.00),
+(1, 4, 2, 299.99, 20.00),
+(2, 2, 1, 4999.99, 200.00),
+(3, 7, 3, 89.99, 0.00),
+(3, 9, 2, 79.99, 5.00),
+(4, 3, 1, 3299.99, 100.00),
+(4, 10, 1, 149.99, 0.00),
+(5, 5, 1, 3599.99, 150.00),
+(6, 6, 1, 1899.99, 0.00),
+(6, 12, 1, 599.99, 50.00),
+(7, 8, 1, 1299.99, 100.00),
+(7, 14, 1, 299.99, 0.00),
+(8, 15, 1, 899.99, 50.00),
+(8, 4, 1, 299.99, 0.00),
+(9, 13, 2, 49.99, 0.00),
+(9, 19, 1, 69.99, 5.00),
+(10, 16, 1, 1499.99, 100.00),
+(11, 17, 1, 249.99, 0.00),
+(11, 4, 1, 299.99, 20.00),
+(12, 18, 1, 999.99, 50.00),
+(12, 10, 2, 149.99, 10.00),
+(13, 7, 1, 89.99, 0.00),
+(13, 13, 3, 49.99, 5.00),
+(14, 3, 1, 3299.99, 200.00),
+(15, 20, 2, 129.99, 0.00),
+(15, 9, 3, 79.99, 10.00),
+(16, 11, 1, 1799.99, 100.00),
+(17, 1, 1, 2499.99, 150.00),
+(17, 15, 1, 899.99, 50.00),
+(18, 2, 1, 4999.99, 300.00),
+(19, 6, 1, 1899.99, 100.00),
+(19, 12, 1, 599.99, 0.00),
+(20, 8, 1, 1299.99, 100.00),
+(20, 14, 2, 299.99, 20.00),
+(21, 5, 1, 3599.99, 200.00),
+(22, 16, 1, 1499.99, 100.00),
+(22, 4, 2, 299.99, 0.00),
+(23, 17, 1, 249.99, 0.00),
+(24, 18, 1, 999.99, 50.00),
+(25, 19, 2, 69.99, 0.00);
