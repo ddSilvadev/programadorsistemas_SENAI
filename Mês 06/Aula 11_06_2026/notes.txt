@@ -1,6 +1,120 @@
-Revisão do modulo usando o script abaixo.
+Revisão do modulo usando o script de Material Banco de Dados/loja_virtual_treino_SQL_06-2026.sql.
 
-SELECT, FROM, WHERE, JOIN keywords
+SELECT Seleciona colunas de uma tabela.
+
+SELECT nome, email FROM Clientes;
+
+------------------------------------------------------------------------
+
+FROM Indica de qual tabela os dados serão obtidos.
+
+SELECT nome FROM Produtos;
+
+------------------------------------------------------------------------
+
+WHERE Filtra os registros retornados.
+
+SELECT nome, cidade FROM Clientes WHERE estado = ‘SP’;
+
+SELECT nome, preco FROM Produtos WHERE preco > 1000;
+
+------------------------------------------------------------------------
+
+LIKE Busca valores com um padrão.
+
+Clientes cujo nome começa com “M”:
+
+SELECT nome, email FROM Clientes WHERE nome LIKE ‘M%’;
+
+Clientes cujo nome termina com “a”:
+
+SELECT nome FROM Clientes WHERE nome LIKE ‘%a’;
+
+------------------------------------------------------------------------
+
+INNER JOIN Retorna apenas registros com correspondência nas duas
+tabelas.
+
+SELECT c.nome, p.id_pedido FROM Clientes c INNER JOIN Pedidos p ON
+c.id_cliente = p.id_cliente;
+
+------------------------------------------------------------------------
+
+JOIN ENTRE TRÊS TABELAS
+
+SELECT c.nome, p.id_pedido, p.status FROM Clientes c JOIN Pedidos p ON
+c.id_cliente = p.id_cliente JOIN Itens_Pedido i ON p.id_pedido =
+i.id_pedido;
+
+------------------------------------------------------------------------
+
+JOIN PARA MOSTRAR PRODUTO COMPRADO POR CADA CLIENTE
+
+SELECT c.nome, pr.nome FROM Clientes c JOIN Pedidos p ON c.id_cliente =
+p.id_cliente JOIN Itens_Pedido i ON p.id_pedido = i.id_pedido JOIN
+Produtos pr ON i.id_produto = pr.id_produto;
+
+------------------------------------------------------------------------
+
+WHERE + JOIN
+
+SELECT c.nome, p.id_pedido, p.status FROM Clientes c JOIN Pedidos p ON
+c.id_cliente = p.id_cliente WHERE p.status = ‘Cancelado’;
+
+------------------------------------------------------------------------
+
+AND Todas as condições devem ser verdadeiras.
+
+SELECT nome, cidade, limite_credito FROM Clientes WHERE estado = ‘SP’
+AND limite_credito > 5000;
+
+------------------------------------------------------------------------
+
+OR Pelo menos uma condição deve ser verdadeira.
+
+SELECT nome, cidade, estado FROM Clientes WHERE estado = ‘SP’ OR estado
+= ‘RJ’;
+
+------------------------------------------------------------------------
+
+AND + OR
+
+SELECT nome, preco, id_categoria FROM Produtos WHERE preco > 1000 AND
+(id_categoria = 1 OR id_categoria = 2);
+
+------------------------------------------------------------------------
+
+ORDER BY
+
+Ordena os resultados.
+
+SELECT nome, email FROM Clientes ORDER BY nome ASC;
+
+SELECT nome, preco FROM Produtos ORDER BY preco DESC;
+
+SELECT nome, estado FROM Clientes ORDER BY estado ASC, nome ASC;
+
+SELECT id_pedido, status, data_pedido FROM Pedidos WHERE status =
+‘Cancelado’ ORDER BY data_pedido DESC;
+
+------------------------------------------------------------------------
+---------------
+Resumo:
+
+SELECT -> Escolhe as colunas.
+FROM -> Define a tabela.
+WHERE -> Filtra os registros.
+JOIN -> Relaciona tabelas através de chaves.
+ON -> Define a condição do JOIN.
+LIKE -> Pesquisa padrões em textos (% representa qualquer sequência de caracteres).
+AND -> Todas as condições devem ser verdadeiras.
+OR -> Pelo menos uma condição deve ser verdadeira.
+Use parênteses ( ) para deixar clara a ordem de avaliação quando combinar AND e OR.
+ORDER BY -> Ordena os resultados.
+ASC -> Ordem crescente (A-Z, menor para maior).
+DESC -> Ordem decrescente (Z-A, maior para menor).
+É possível ordenar por uma ou mais colunas.
+
 
 
 -- Script SQL completo para criação e população do banco de dados didático "loja_virtual"
