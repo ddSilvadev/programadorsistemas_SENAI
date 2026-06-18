@@ -1,0 +1,141 @@
+DB criado usando o script em script gerar o DB  da prova.txt
+
+
+Questão 1:
+Considere a tabela clientes com as colunas id, nome, email, telefone e data_cadastro. Qual comando SQL retorna apenas o nome e o e-mail de todos os clientes?
+
+Minha resposta:
+
+SELECT nome, email FROM clientes;
+
++---------------+---------------------+
+| nome          | email               |
++---------------+---------------------+
+| Carlos Silva  | carlos@email.com    |
+| Ana Souza     | ana.souza@email.com |
+| Marcos Santos | marcos@email.com    |
+| Juliana Lima  | ju.lima@email.com   |
++---------------+---------------------+
+
+----------------------------------
+
+Questão 2:
+Analisando a tabela produtos, você precisa listar os itens que possuem um preço maior ou igual a R$ 150,00. Qual cláusula WHERE filtrará corretamente o "Teclado Mecânico", o "Monitor 24 polegadas" e o "Headset Wireless"?
+
+Minha resposta:
+
+WHERE preco >= 150.00;
+
++----+----------------------+--------+---------+--------------+
+| id | nome                 | preco  | estoque | categoria_id |
++----+----------------------+--------+---------+--------------+
+|  1 | Teclado Mecânico     | 180.00 |      15 |            5 |
+|  3 | Monitor 24 polegadas | 850.00 |       8 |            5 |
+|  5 | Headset Wireless     | 350.00 |      12 |            5 |
++----+----------------------+--------+---------+--------------+
+
+----------------------------------
+
+Questão 3:
+Se você executar o comando SELECT nome FROM clientes ORDER BY nome; no seu MySQL Workbench, qual será a ordem de exibição dos nomes dos clientes na tela?
+
+Minha resposta:
+
++---------------+
+| nome          |
++---------------+
+| Ana Souza     |
+| Carlos Silva  |
+| Juliana Lima  |
+| Marcos Santos |
++---------------+
+
+----------------------------------
+
+Questão 4:
+Para gerar uma lista da tabela equipe exibindo os funcionários organizados do maior salário para o menor salário (iniciando pela Tech Lead Beatriz Costa), qual comando deve ser executado?
+
+Minha resposta:
+
+SELECT * FROM equipe ORDER BY salario DESC;
++----+------------------+----------------------+---------+
+| id | nome             | cargo                | salario |
++----+------------------+----------------------+---------+
+|  2 | Beatriz Costa    | Tech Lead            | 9200.00 |
+|  4 | Camila Rocha     | Analista de Sistemas | 6200.00 |
+|  1 | Fernando Almeida | Desenvolvedor Pleno  | 5500.00 |
+|  3 | Rodrigo Pires    | Estagiário QA        | 1800.00 |
++----+------------------+----------------------+---------+
+
+----------------------------------
+
+Questão 5:
+ Para criar a estrutura da tabela cursos (que ficou de fora da população inicial do banco), quais palavras-chaves completam corretamente as lacunas abaixo para definir a tabela e a chave primária?
+
+________ TABLE cursos (
+id INT ________ KEY AUTO-INCREMENT,
+nome VARCHAR(100) NOT NULL
+);
+
+Minha resposta:
+
+CREATE / UNIQUE
+
+----------------------------------
+
+Questão 6:
+Ao executar a seguinte consulta no MySQL Workbench, qual é o resultado retornado pelo banco de dados?
+
+SELECT nome, estoque FROM produtos WHERE estoque = 0;
+
+Minha resposta:
+
+Uma linha contendo Mouse Gamer | 0.
+
++-------------+---------+
+| nome        | estoque |
++-------------+---------+
+| Mouse Gamer |       0 |
++-------------+---------+
+
+----------------------------------
+
+Questão 7: Para buscar especificamente os clientes cadastrados que moram na cidade de São Paulo, o comando correto deve conter o texto entre aspas. Qual das opções abaixo retorna corretamente a Ana Souza e a Juliana Lima?
+
+
+Minha resposta:
+
+SELECT * FROM clientes WHERE cidade = 'São Paulo';
++----+--------------+---------------------+-----------------+-----------+---------------+
+| id | nome         | email               | telefone        | cidade    | data_cadastro |
++----+--------------+---------------------+-----------------+-----------+---------------+
+|  2 | Ana Souza    | ana.souza@email.com | (11) 98888-2222 | São Paulo | 2026-02-20    |
+|  4 | Juliana Lima | ju.lima@email.com   | (11) 96666-4444 | São Paulo | 2026-03-12    |
++----+--------------+---------------------+-----------------+-----------+---------------+
+
+----------------------------------
+
+Questão 8:
+Você precisa listar os produtos da categoria 5, ordenados do mais caro para o mais barato. Qual é a ordem hierárquica correta das cláusulas que o MySQL exige para que a query funcione sem erros?
+
+Minha resposta:
+
+SELECT ... FROM ... WHERE ... ORDER BY ...
+
+----------------------------------
+
+Questão 9:
+Ao analisar o Script de Criação do nosso banco de dados, notamos que a tabela produtos possui uma coluna chamada categoria_id, que faz referência à tabela categorias. No Diagrama Entidade-Relacionamento (DER), essa ligação representa qual tipo de relacionamento clássico entre as duas entidades?
+
+Minha resposta:
+
+Muitos para Muitos (N:N), pois um produto pode ter muitas categorias e uma categoria pode ter muitos produtos.
+
+----------------------------------
+
+Questão 10:
+Para garantir a integridade dos dados e ligar fisicamente a coluna categoria_id da tabela produtos ao id da tabela categorias no MySQL Workbench, qual conceito/restrição do modelo relacional deve ser aplicado nessa coluna?
+
+Minha resposta:
+
+FOREIGN KEY (Chave Estrangeira)
